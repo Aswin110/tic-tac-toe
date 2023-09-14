@@ -16,6 +16,27 @@ let updateArray = () => {
     console.log(t);
   }
 
+let changeValue = () => {
+  if(value === player1){
+    return value = player2;
+  }else if(value === player2){
+    return value = player1;
+  }
+}
+
+let winningCondition = () => {
+  if((t[0] === value && t[1] === value && t[2] === value)||
+    (t[3] === value && t[4] === value && t[5] === value)||
+    (t[6] === value && t[7] === value && t[8] === value)||
+    (t[0] === value && t[3] === value && t[6] === value)||
+    (t[1] === value && t[4] === value && t[7] === value)||
+    (t[2] === value && t[5] === value && t[8] === value)||
+    (t[0] === value && t[4] === value && t[8] === value)||
+    (t[2] === value && t[4] === value && t[6] === value)){
+    console.log(`player ${value} won the game!!!`);
+  }
+ }
+
 fieldElement.forEach(field=>field.addEventListener('click',()=>{
       if(!field.innerText){
         field.innerText= value;
@@ -24,38 +45,10 @@ fieldElement.forEach(field=>field.addEventListener('click',()=>{
         changeValue();
 } } ) )
 
-function changeValue(){
-  if(value === player1){
-    return value = player2;
-  }else if(value === player2){
-    return value = player1;
-  }
-}
-
 restartButton.addEventListener("click",()=>{
   fieldElement.forEach(field=>{field.innerText= "";
   })
   t.splice(0,t.length);
-  console.log(t);
   value = 'X';
 })
 
-function winningCondition(){
-  if(t[0] === value && t[1] === value && t[2] === value){
-    console.log(`${value} won 1`);
-  }else if(t[3] === value && t[4] === value && t[5] === value){
-    console.log(`${value} won 2`);
-  }else if(t[6] === value && t[7] === value && t[8] === value){
-    console.log(`${value} won 3`);
-  }else if(t[0] === value && t[3] === value && t[6] === value ){
-    console.log(`${value} won 4`);
-  }else if(t[1] === value && t[4] === value && t[7] === value ){
-    console.log(`${value} won 5`);
-  }else if(t[2] === value && t[5] === value && t[8] === value ){
-    console.log(`${value} won 6`);
-  }else if(t[0] === value && t[4] === value & t[8] === value ){
-    console.log(`${value} won 7`);
-  }else if(t[2] === value && t[4] === value && t[6] === value ){
-    console.log(`${value} won 8`);
-  }
-}
