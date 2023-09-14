@@ -1,7 +1,8 @@
 import './style.css'
 
 const fieldElement = document.querySelectorAll('.field');
-const restartButton = document.getElementById('restart')
+const restartButton = document.getElementById('restart');
+const message = document.getElementById('message');
 
 let t = new Array(9);
 
@@ -9,12 +10,13 @@ const player1 = 'X';
 const player2 = 'O';
 let round = 0;
 let value = player1;
+let game = false;
 
 let updateArray = () => {
   for(let i =0 ; i < fieldElement.length; i++){
     t[i] = fieldElement[i].textContent;
+    }
   }
-}
 
 let changeValue = () => {
   if(value === player1){
@@ -33,25 +35,27 @@ let winningCondition = () => {
     (t[2] === value && t[5] === value && t[8] === value)||
     (t[0] === value && t[4] === value && t[8] === value)||
     (t[2] === value && t[4] === value && t[6] === value)){
-    console.log(`player ${value} won the game!!!`);
+    game = true;
+    message.innerText = `Player '${value}' won the game!!!`
+    return;
+
   }
-}
+  console.log(!winningCondition)
+ }
  
-let drawGame = () => {
-  if(round === 9){
-    console.log('draw game')
-  }
-}
+ let drawGame = () => {
+  if(round === 9)message.innerText = "Draw Game";
+ }
 
 fieldElement.forEach(field=>field.addEventListener('click',()=>{
-      if(!field.innerText){
-        field.innerText= value;
-        updateArray();
-        winningCondition()
-        changeValue();
-        round++;
-        drawGame()
-} } ) )
+  if((!field.innerText) && (!game)){
+    field.innerText= value;
+    updateArray();
+    winningCondition()
+    changeValue();
+    round++;
+    drawGame()
+}}))
 
 restartButton.addEventListener("click",()=>{
   fieldElement.forEach(field=>{field.innerText= "";
@@ -59,5 +63,5 @@ restartButton.addEventListener("click",()=>{
   t.splice(0,t.length);
   value = 'X';
   round = 0;
+  game = false;
 })
-
