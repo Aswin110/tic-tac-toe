@@ -7,14 +7,14 @@ let t = new Array(9);
 
 const player1 = 'X';
 const player2 = 'O';
+let round = 0;
 let value = player1;
 
 let updateArray = () => {
   for(let i =0 ; i < fieldElement.length; i++){
     t[i] = fieldElement[i].textContent;
-    }
-    console.log(t);
   }
+}
 
 let changeValue = () => {
   if(value === player1){
@@ -35,7 +35,13 @@ let winningCondition = () => {
     (t[2] === value && t[4] === value && t[6] === value)){
     console.log(`player ${value} won the game!!!`);
   }
- }
+}
+ 
+let drawGame = () => {
+  if(round === 9){
+    console.log('draw game')
+  }
+}
 
 fieldElement.forEach(field=>field.addEventListener('click',()=>{
       if(!field.innerText){
@@ -43,6 +49,8 @@ fieldElement.forEach(field=>field.addEventListener('click',()=>{
         updateArray();
         winningCondition()
         changeValue();
+        round++;
+        drawGame()
 } } ) )
 
 restartButton.addEventListener("click",()=>{
@@ -50,5 +58,6 @@ restartButton.addEventListener("click",()=>{
   })
   t.splice(0,t.length);
   value = 'X';
+  round = 0;
 })
 
