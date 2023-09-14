@@ -64,4 +64,5 @@ restartButton.addEventListener("click",()=>{
   value = 'X';
   round = 0;
   game = false;
-})
+  message.innerText = "X O X";
+}) 
